@@ -48,11 +48,18 @@
             form: '#form-1',
             errorSelector: '.form-message',
             rules: [
-                Validator.isRequired('#fullname'),
-                Validator.isEmail('#email'),
-                Validator.minLength('#password', 6),
-                Validator.isConfirmed('#password_confirmation')
-             ]
+                Validator.isRequired('#fullname', 'Vui lòng nhập tên đầy đủ'),
+                Validator.isRequired('#email'),
+                Validator.isEmail('#email', 'Vui lòng nhập địa chỉ email chính xác'),
+                Validator.minLength('#password', 6,),
+                Validator.isRequired('#password_confirmation'),
+                Validator.isConfirmed('#password_confirmation', function () {
+                    return document.querySelector('#form-1 #password').value;
+                }, 'Mật khẩu nhập lại không chính xác')
+             ],
+             onSubmit: function (data) {
+                console.log(data);
+             }
         });
     </script>
 </html>
